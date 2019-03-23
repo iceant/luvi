@@ -3,9 +3,9 @@
 set LUVI_PUBLISH_USER=luvit
 set LUVI_PUBLISH_REPO=luvi
 
-set GENERATOR=Visual Studio 12
-reg query HKEY_CLASSES_ROOT\VisualStudio.DTE.14.0 >nul 2>nul
-IF %errorlevel%==0 set GENERATOR=Visual Studio 14
+set GENERATOR=Visual Studio 15
+reg query HKEY_CLASSES_ROOT\VisualStudio.DTE.15.0 >nul 2>nul
+IF %errorlevel%==0 set GENERATOR=Visual Studio 15 2017
 set GENERATOR64=%GENERATOR% Win64
 
 for /f %%i in ('git describe') do set LUVI_TAG=%%i
