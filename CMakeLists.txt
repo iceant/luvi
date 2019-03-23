@@ -99,16 +99,16 @@ else (WithSharedLibluv)
   include_directories(deps/luv/deps/libuv/include)
   if (WITH_LUA_ENGINE STREQUAL Lua)
     include_directories(deps/luv/deps/lua/src)
-    set(LUVI_LIBRARIES luv lualib uv)
+    set(LUVI_LIBRARIES luv lualib uv_a)
   else()
     include_directories(deps/luv/deps/luajit/src)
-    set(LUVI_LIBRARIES luv luajit-5.1 uv)
+    set(LUVI_LIBRARIES luv luajit-5.1 uv_a)
   endif()
   add_subdirectory(deps/luv)
 endif (WithSharedLibluv)
 
 set(LUA_COMPAT53_DIR deps/luv/deps/lua-compat-5.3)
-if($ENV{LUA_COMPAT53_DIR})
+if(DEFINED ENV{LUA_COMPAT53_DIR})
   set(LUA_COMPAT53_DIR $ENV{LUA_COMPAT53_DIR})
 endif()
 include_directories(${LUA_COMPAT53_DIR})
@@ -178,6 +178,7 @@ if("${CMAKE_SYSTEM_NAME}" MATCHES "Linux")
 endif()
 
 target_link_libraries(luvi ${LUVI_LIBRARIES} ${EXTRA_LIBS} ${CMAKE_THREAD_LIBS_INIT})
+set_target_properties(luvi PROPERTIES ENABLE_EXPORTS ON)
 
 ###############################################################################
 ## Installation Targets

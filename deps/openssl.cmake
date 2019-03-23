@@ -11,7 +11,10 @@ else (WithSharedOpenSSL)
   message("Enabling Static OpenSSL")
   include(ExternalProject)
 
-  set(OPENSSL_CONFIG_OPTIONS no-unit-test no-shared no-asm no-stdio no-idea no-mdc2 no-rc5 --prefix=${CMAKE_BINARY_DIR})
+  set(OPENSSL_CONFIG_OPTIONS no-unit-test no-shared no-stdio no-idea no-mdc2 no-rc5 --prefix=${CMAKE_BINARY_DIR})
+  if(NOT WithOpenSSLASM)
+    set(OPENSSL_CONFIG_OPTIONS no-asm ${OPENSSL_CONFIG_OPTIONS})
+  endif()
 
   if(WIN32)
       if("${CMAKE_GENERATOR}" MATCHES "(Win64|IA64)")
@@ -27,8 +30,9 @@ else (WithSharedOpenSSL)
   
   ExternalProject_Add(openssl
       PREFIX            openssl
-      URL               https://www.openssl.org/source/openssl-1.1.0i.tar.gz
-      URL_HASH          SHA256=ebbfc844a8c8cc0ea5dc10b86c9ce97f401837f3fa08c17b2cdadc118253cf99
+      URL               https://www.openssl.org/source/openssl-1.1.1b.tar.gz
+      URL_HASH          SHA256=5c557b023230413dfb0756f3137a13e6d726838ccd1430888ad15bfb2b43ea4b
+      LOG_BUILD         ON
       BUILD_IN_SOURCE   YES
       BUILD_COMMAND     ${OPENSSL_BUILD_COMMAND}
       CONFIGURE_COMMAND ${OPENSSL_CONFIGURE_COMMAND}
