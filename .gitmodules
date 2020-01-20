@@ -19,3 +19,6 @@
 [submodule "deps/lpeg"]
 	path = deps/lpeg
 	url = https://github.com/luvit/lpeg.git
+[submodule "deps/lsqlite3"]
+	path = deps/lsqlite3
+	url = https://github.com/iceant/lsqlite3

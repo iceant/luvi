@@ -54,6 +54,10 @@ LUALIB_API int luaopen_zlib(lua_State * const L);
 #ifdef WITH_LPEG
 int luaopen_lpeg(lua_State* L);
 #endif
+#ifdef WITH_SQLITE
+#include "sqlite3.h"
+int luaopen_lsqlite3(lua_State* L);
+#endif
 
 void luvi_openlibs(lua_State *L);
 #endif

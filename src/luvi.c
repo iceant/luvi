@@ -45,6 +45,10 @@ LUALIB_API int luaopen_luvi(lua_State *L) {
   lua_pushstring(L, WINSVC_VERSION);
   lua_setfield(L, -2, "winsvc");
 #endif
+#ifdef WITH_SQLITE
+  lua_pushstring(L, SQLITE_VERSION);
+  lua_setfield(L, -2, "sqlite3");
+#endif
   lua_pushstring(L, uv_version_string());
   lua_setfield(L, -2, "libuv");
   lua_setfield(L, -2, "options");

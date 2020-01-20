@@ -73,6 +73,8 @@ option(WithPackageDEB "Build DEB package." OFF)
 option(WithPackageRPM "Build RPM package." OFF)
 option(WithPackageNSIS "Build NSIS package." OFF)
 option(WithPackageBUNDLE "Build OSX bundle." OFF)
+option(WithSQLite3 "Include lua-sqlite3" OFF)
+
 
 find_package(Threads)
 
@@ -133,6 +135,10 @@ endif (WithLPEG)
 if (WithZLIB)
   include(deps/zlib.cmake)
 endif (WithZLIB)
+
+if (WithSQLite3)
+  include(deps/sqlite3.cmake)
+endif(WithSQLite3)
 
 add_definitions( -DLUVI_VERSION="${LUVI_VERSION}" )
 

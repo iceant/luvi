@@ -31,6 +31,9 @@ int luaopen_rex_pcre(lua_State* L);
 #ifdef WITH_PLAIN_LUA
 #include "../deps/bit.c"
 #endif
+#ifdef WITH_SQLITE
+int luaopen_lsqlite3(lua_State *L);
+#endif
 
 #ifdef WITH_CUSTOM
 int luvi_custom(lua_State* L);
@@ -114,6 +117,12 @@ static lua_State* vm_acquire(){
   // Store zlib module definition at preload.zlib
   lua_pushcfunction(L, luaopen_zlib);
   lua_setfield(L, -2, "zlib");
+#endif
+
+#ifdef WITH_SQLITE
+  // Store sqlite3 module definition at preload.sqlite3
+  lua_pushcfunction(L, luaopen_lsqlite3);
+  lua_setfield(L, -2, "lsqlite3");
 #endif
 
 #ifdef WITH_PLAIN_LUA
