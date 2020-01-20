@@ -20,6 +20,9 @@
 #include "luv.h"
 #include "lenv.c"
 #include "luvi.c"
+#ifndef MINIZ_NO_STDIO
+#define MINIZ_NO_STDIO
+#endif
 #include "lminiz.c"
 #include "snapshot.c"
 #ifdef WITH_PCRE
@@ -125,6 +128,7 @@ static lua_State* vm_acquire(){
       lua_pushcfunction(L, luaopen_luvipath);
       lua_setfield(L, -2, "luvipath");
       luaL_requiref(L, "bit", luaopen_bit, 1);
+      lua_pop(L, 1);
   }
 #endif
 
