@@ -3,10 +3,10 @@
 set LUVI_PUBLISH_USER=luvit
 set LUVI_PUBLISH_REPO=luvi
 
-set GENERATOR=Visual Studio 15
-reg query HKEY_CLASSES_ROOT\VisualStudio.DTE.15.0 >nul 2>nul
-IF %errorlevel%==0 set GENERATOR=Visual Studio 15 2017
-set GENERATOR64=%GENERATOR% Win64
+set GENERATOR=Visual Studio 16 2019
+reg query HKEY_CLASSES_ROOT\VisualStudio.DTE.14.0 >nul 2>nul
+IF %errorlevel%==0 set GENERATOR=Visual Studio 14
+set GENERATOR64=%GENERATOR%
 
 for /f %%i in ('git describe') do set LUVI_TAG=%%i
 IF NOT "x%1" == "x" GOTO :%1
@@ -15,12 +15,12 @@ GOTO :build
 
 :regular
 ECHO "Building regular64"
-cmake -DWithOpenSSL=ON -DWithSharedOpenSSL=OFF -DWithPCRE=ON -DWithLPEG=ON -DWithSharedPCRE=OFF -H. -Bbuild  -G"%GENERATOR64%"
+cmake -DWithOpenSSL=ON -DWithSharedOpenSSL=OFF -DWithPCRE=ON -DWithLPEG=ON -DWithSharedPCRE=OFF -DWithSQLite3=ON -H. -Bbuild-regular-x64  -G"%GENERATOR64%" -A x64 -T host=x64
 GOTO :end
 
 :regular-asm
 ECHO "Building regular64 asm"
-cmake -DWithOpenSSLASM=ON -DWithOpenSSL=ON -DWithSharedOpenSSL=OFF -DWithPCRE=ON -DWithLPEG=ON -DWithSharedPCRE=OFF -H. -Bbuild  -G"%GENERATOR64%"
+cmake -DWithOpenSSLASM=ON -DWithOpenSSL=ON -DWithSharedOpenSSL=OFF -DWithPCRE=ON -DWithLPEG=ON -DWithSharedPCRE=OFF -DWithSQLite3=ON -H. -Bbuild-regular-asm-x64  -G"%GENERATOR64%"  -A x64 -T host=x64
 GOTO :end
 
 :regular32
@@ -35,12 +35,12 @@ GOTO :end
 
 :tiny
 ECHO "Building tiny64"
-cmake -H. -Bbuild -G"%GENERATOR64%"
+cmake -H. -Bbuild-tiny-x64 -G"%GENERATOR64%" -A x64 -T host=x64
 GOTO :end
 
 :tiny32
 ECHO "Building tiny32"
-cmake -H. -Bbuild -G"%GENERATOR%"
+cmake -H. -Bbuild-tiny-x86 -G"%GENERATOR%"
 GOTO :end
 
 :build

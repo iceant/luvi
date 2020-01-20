@@ -17,7 +17,7 @@ else (WithSharedOpenSSL)
   endif()
 
   if(WIN32)
-      if("${CMAKE_GENERATOR}" MATCHES "(Win64|IA64)")
+      if("${CMAKE_GENERATOR}" MATCHES "(Win64|IA64)" OR ${CMAKE_SYSTEM_PROCESSOR} MATCHES "(x86_64|AMD64|IA64)")
         set(OPENSSL_CONFIGURE_COMMAND perl ./Configure VC-WIN64A ${OPENSSL_CONFIG_OPTIONS})
       else()
         set(OPENSSL_CONFIGURE_COMMAND perl ./Configure VC-WIN32 ${OPENSSL_CONFIG_OPTIONS})

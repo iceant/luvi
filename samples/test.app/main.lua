@@ -182,7 +182,6 @@ do
   local inflated, err, part = inflator:inflate(deflated, "finish")
   p("Decompressed", #(inflated or part or ""))
   inflated = assert(inflated, err)
-
   assert(inflated == original, "inflated data doesn't match original")
 end
 

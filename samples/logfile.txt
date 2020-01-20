@@ -1,0 +1,8 @@
+SpawnServiceCtrlDispatcher Succeeded
+Service Control Dispatcher returned with err 服务进程无法连接到服务控制器上。
+SpawnServiceCtrlDispatcher Succeeded
+Service Control Dispatcher returned with err 服务进程无法连接到服务控制器上。
+SpawnServiceCtrlDispatcher Succeeded
+Service Control Dispatcher returned with err 服务进程无法连接到服务控制器上。
+SpawnServiceCtrlDispatcher Succeeded
+Service Control Dispatcher returned with err 服务进程无法连接到服务控制器上。
